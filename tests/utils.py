@@ -11,6 +11,7 @@ from nile.signer import Signer
 
 
 MAX_UINT256 = (2**128 - 1, 2**128 - 1)
+MAX_FELT = 2 ** 251 + 17 * 2 ** 192
 INVALID_UINT256 = (MAX_UINT256[0] + 1, MAX_UINT256[1])
 ZERO_ADDRESS = 0
 TRUE = 1
@@ -154,12 +155,12 @@ class TestSigner():
                 (contract_address, 'another_method', [arg_1, arg_2])
             ]
         )
-                           
+
     """
     def __init__(self, private_key):
         self.signer = Signer(private_key)
         self.public_key = self.signer.public_key
-        
+
     async def send_transaction(self, account, to, selector_name, calldata, nonce=None, max_fee=0):
         return await self.send_transactions(account, [(to, selector_name, calldata)], nonce, max_fee)
 
