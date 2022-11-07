@@ -13,7 +13,7 @@ from starkware.cairo.common.math import (
     split_felt,
 )
 from starkware.cairo.common.bool import TRUE, FALSE
-from starkware.cairo.common.uint256 import Uint256
+from starkware.cairo.common.uint256 import Uint256, uint256_check
 
 from openzeppelin.utils.constants import UINT8_MAX
 
@@ -24,6 +24,7 @@ const MAX_HIGH = 10633823966279327296825105735305134080
 const HIGH_SHIFT = 2 ** 128
 
 func _to_felt{range_check_ptr}(u : Uint256) -> (val : felt):
+    uint256_check(u)
     assert_le(u.high, MAX_HIGH)
     let val = u.high * HIGH_SHIFT + u.low
     return (val)
